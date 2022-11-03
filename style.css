@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap');
+
+:root {
+    background-color: #292828;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 62.5%;
+    font-family: 'Roboto', 'sans-serif', Calibri
+}
+
+h1 {
+    font-size: 4rem;
+    color: whitesmoke;
+    margin-bottom: 5rem;
+}
+
+h2 {
+    font-size: 4.2rem;
+    margin-bottom: 4rem;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.flex-column {
+    display:flex;
+    flex-direction: column;
+}
+
+.flex-center{
+    justify-content: center;
+    align-items: center;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+/* BTN config */
+.btn {
+    color: whitesmoke;
+    font-size: 2.4rem;
+    font-weight: 200;
+    letter-spacing: 1px;
+    padding: 13px 20px 13px;
+    margin-bottom: 2rem;
+    text-decoration: none;
+    outline: 0;
+    border: 1px solid #ffb005;
+    cursor: pointer;
+    position: relative;
+    background-color: #ffffff00;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    border-radius: 4px;
+  }
+
+.btn:after {
+    content: "";
+    background-color: #ffb005;
+    width: 100%;
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    top: 7px;
+    left: 7px;
+    transition: 0.2s;
+    border-radius: 4px;
+}
+
+.btn:hover:after {
+    top: 0px;
+    left: 0px;
+  }
+
+@media (min-width: 768px) {
+    .btn {
+        padding: 13px 50px 13px;
+    }
+}
+
+.btn[disabled]:hover {
+    cursor: not-allowed; 
+}
+
+/* Questions Configuration */
+body {
+    color: whitesmoke;
+}
+
+.choice-container {
+    display: flex;
+    margin-bottom: 0.8rem;
+    width: 100%;
+    border-radius: 4px;
+    background-color: #ca5a10;
+    font-size: 3rem;
+    min-width: 80rem;
+}
+
+.choice-container:hover {
+    cursor: pointer;
+    transform: translateY(-2px);
+}
+
+.choice-prefix {
+    padding: 2rem 2.5rem;
+    color: whitesmoke;
+}
+
+.choice-text {
+    padding: 2rem;
+    width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    .choice-container{
+        min-width: 40rem;
+    }
+}
+
+/* Behavior when correct or incorrect */
+.correct {
+    background: #047e04;
+}
+
+.incorrect {
+    background: #a40d0d;
+}
+
+/* Heads Display */
+
+#hud {
+    display: flex;
+    justify-content: space-between;
+}
+
+#hud-prefix {
+    text-align: center;
+    font-size: 2rem;
+}
+
+#hud-main-text {
+    text-align: center;
+}
