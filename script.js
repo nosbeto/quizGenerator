@@ -3,20 +3,20 @@ const choices = Array.from(document.querySelectorAll('#choice-text'));
 const progressText = document.querySelector('#progressText');
 const scoreText = document.querySelector('#score');
 
-var currentQuestion = {};
-var acceptingAnswer = true;
-var score = 0;
-var questionCounter = 0;
-var availableQuestions = []
+let currentQuestion = {};
+let acceptingAnswers = true;
+let score = 0;
+let questionCounter = 0;
+let availableQuestions = []
 
-questions [
+let questions = [
     {
         question: 'What is my name?',
         choice1: 'Alberto',
         choice2: 'John',
         choice3: 'Beto',
         choice4: 'Jose',
-        answer: 1
+        answer: 1,
     },
     {
         question: 'What is my name2?',
@@ -24,7 +24,7 @@ questions [
         choice2: 'John',
         choice3: 'Beto',
         choice4: 'Jose',
-        answer: 2
+        answer: 2,
     },
     {
         question: 'What is my name3?',
@@ -32,7 +32,7 @@ questions [
         choice2: 'John',
         choice3: 'Beto',
         choice4: 'Jose',
-        answer: 3
+        answer: 3,
     },
     {
         question: 'What is my name4?',
@@ -40,7 +40,7 @@ questions [
         choice2: 'John',
         choice3: 'Beto',
         choice4: 'Jose',
-        answer: 4
+        answer: 4,
     },
     {
         question: 'What is my name?',
@@ -48,7 +48,7 @@ questions [
         choice2: 'John',
         choice3: 'Beto',
         choice4: 'Jose',
-        answer: 2
+        answer: 2,
     }
 ]
 
@@ -62,19 +62,21 @@ function startGame() {
     getNewQuestion()
 }
 
-function getNewQuestion() {
-    if(availableQuestions.length ===0 || questionCounter > MAX_QUESTIONS {
+getNewQuestion = () => {
+    if(availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
         localStorage.setItem('MostRecentScore', score)
+
         return window.location.assign('/end.html')
     }
     questionCounter++
     progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`
+    progressBarFull.style.width = `${(questionCounter/MAX_QUESTIONS) *100}%`
 
     const questionsIndex = Math.floor(Math.random() * availableQuestions.length)
     currentQuestion = availableQuestions[questionsIndex]
     question.innerText = currentQuestion.question
 
-    choices.forEach(choice =>{
+    choices.forEach(choice => {
         const number = choice.dataset['number']
         choice.innerText = currentQuestion['choice' + number]
     })
@@ -84,6 +86,26 @@ function getNewQuestion() {
     acceptingAnswers = true
 }
 
-choice.forEach(choice => {
+choices.forEach(choice => {
+    choice.addEventListener('click', e => {
+        if(!acceptingAnswers) return
 
+        acceptingAnswers = false
+        const selectedChoice = e.target
+        const selectedAnswer = selectedChoice.dataset['number']
+        let classToApply = selectedAnswer == currentQuestion.answer ? 'correct' : 
+        'incorrect'
+
+        if(classToApply === 'correct') {
+            incrementScore(SCORE_POINTS)
+        }
+
+        selectedChoice.parentElement.classList.add(classToApply)
+
+        setTimeout(() => {
+            selectedChoice.parentElement.classList.remove(classToApply)
+            getNewQuestion()
+
+        },1000)
+    })
 })
